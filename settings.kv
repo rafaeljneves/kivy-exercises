@@ -1,0 +1,17 @@
+#:kivy 1.10.0
+#:import atlas kivy.atlas.Atlas
+
+<WelcomeScreen>:
+    name: "welcome"
+    label_wid: my_custom_label
+    Button:
+        text: "Lets play it!"
+        size_hint: None, None
+        size: 200, 70
+        pos: 300, 200
+        font_size: 20
+        on_press: root.do_action()
+
+    Label:
+        id: my_custom_label
+        text: ' '
