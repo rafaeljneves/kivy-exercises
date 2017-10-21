@@ -10,6 +10,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty, StringProperty
+from exercises import button as button_exercise
 
 #Load kv file
 Builder.load_file('settings.kv')
@@ -35,11 +36,21 @@ class MainApp(App):
     label = None
     botao = None
     image = None
+    opcao = None
 
     def build(self):
         #root = self.setup_gui()
         self.title = "Play Game"
-        return sm
+        opcao="button_exercise"
+
+        if   opcao == "welcome":
+            return sm
+
+        elif opcao == "setup_gui":
+            return self.setup_gui()
+
+        elif opcao == "button_exercise":
+            return button_exercise.controllerApp().run()
 
     def setup_gui(self):
 
@@ -55,3 +66,4 @@ class MainApp(App):
         return layout
 
 MainApp().run()
+
