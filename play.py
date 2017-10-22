@@ -64,7 +64,7 @@ class MainApp(App):
 
     def setup_gui(self):
 
-        self.image = Loader.image('playerboy_big.png')
+        self.image = Loader.image('player1.png')
         self.label = Label(text='carregando...\n')
         self.botao = Button(text='Play')
 

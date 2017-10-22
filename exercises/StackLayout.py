@@ -21,7 +21,7 @@ StackLayout:
         size_hint: .2,.1
                         
     Image:
-        source: 'static/images/player1.png'
+        source: '../static/images/player1.png'
         size: self.texture_size
         size_hint: None, None
         pos: 300,300
