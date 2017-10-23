@@ -1,22 +1,132 @@
 #:kivy 1.10.0
 #:import atlas kivy.atlas.Atlas
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
 
 <WelcomeScreen>:
     name: "welcome"
     label_wid: my_custom_label
+    Image:
+        source: 'static/images/player1.png'
+        size: self.texture_size
+        pos: 0,50
+
     Button:
         text: "Lets play it!"
         size_hint: None, None
-        size: 200, 70
-        pos: 300, 200
+        size: 150, 50
+        pos: 330, 100
         font_size: 20
-        on_release: root.do_action()
-
+        on_release:
+            root.manager.transition = FadeTransition()
+            root.manager.current = "basic"
+            #root.do_action()
     Label:
         id: my_custom_label
         text: ' '
 
+
+<BasicInstructions>:
+    name: "basic"
+    Label:
+        text: "Press keys < > to play!."
+        font_size: 30
+        color: .8,.9,0,1
+    Button:
+        text: "Play"
+        size_hint: None, None
+        size: 150, 50
+        pos: 330, 100
+        font_size: 30
+        on_release:
+            root.manager.transition = FadeTransition()
+            root.manager.current = "game"
+            app.play_game()
+
 <controller>:
     Button:
-        text: 'novo'
+        text: 'new'
         size_hint: .2, .2
+
+
+<GameScreen>:
+    name: "game"
+    RelativeLayout:
+        padding: 10
+        Image:
+            source: 'static/images/isometric_house.png'
+            size: 50,50 #self.texture_size
+            height: 400
+
+        Image:
+            source: 'static/images/player1_r.png'
+            size: self.texture_size
+            pos: 0,0
+
+        Label:
+            text: 'Enjoy it! '
+            pos: 0,-200
+
+        StackLayout:
+            orientation: 'lr-tb'
+            padding: 10
+            spacing: 10
+            Label:
+                text: '           '
+                font_size: 24
+                bold: True
+                color: (50,155,220,1)
+                size_hint: .2,.1
+
+            Label:
+                text: '<><><><><>'
+                pos: 300,500
+                font_size: 24
+                bold: True
+                color: (1,255,255,1)
+                size_hint: .2,.1
+            Label:
+                text: 'Level: '
+                font_size: 24
+                bold: True
+                color: (50,155,220,1)
+                size_hint: .2,.1
+
+            Label:
+                text: 'Score: '
+                font_size: 24
+                bold: True
+                color: (50,155,220,1)
+                size_hint: .2,.1
+<Rotate>:
+    name: "rotate"
+    canvas.before:
+        Color:
+            rgb: .3, .2, 1
+        PushMatrix
+        Rotate:
+            angle: root.angle
+            axis: 0, 0, 1
+            origin: root.center
+    canvas.after:
+        PopMatrix
+
+
+    Image:
+        size_hint: None, None
+        size: 100, 100
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+#<GameScreen>:
+#    name: "game"
+#    Button:
+#        text: "Back"
+#        size_hint: None, None
+#        size: 70, 70
+#        pos: 0, 0
+#        font_size: 30
+#        on_release:
+#            app.root.transition = SlideTransition(direction="right")
+#            root.game.points = 0
+#            app.root.current = "welcome"

@@ -14,6 +14,9 @@ __pycache__/
 #Jupyter Notebook terminal interface
 *.ipynb
 
+#TO DO LIST
+*.txt
+
 # Distribution / packaging
 .Python
 env/
